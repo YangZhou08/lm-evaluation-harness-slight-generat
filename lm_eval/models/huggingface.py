@@ -20,7 +20,9 @@ from tqdm import tqdm
 from transformers.models.auto.modeling_auto import (
     MODEL_FOR_CAUSAL_LM_MAPPING_NAMES,
     MODEL_FOR_SEQ_TO_SEQ_CAUSAL_LM_MAPPING_NAMES,
-)
+) 
+
+from transformers.models.llama.modeling_llama import LlamaWeirdLarge3 
 
 from lm_eval import utils
 from lm_eval.api.instance import Instance
@@ -513,13 +515,22 @@ class HFLM(LM):
                             model_kwargs["bnb_4bit_compute_dtype"]
                         )
             print("model_class: ", self.AUTO_MODEL_CLASS) 
+            '''
             self._model = self.AUTO_MODEL_CLASS.from_pretrained(
                 pretrained,
                 revision=revision,
                 torch_dtype=get_dtype(dtype),
                 trust_remote_code=trust_remote_code,
                 **model_kwargs,
-            )
+            ) 
+            ''' 
+            self._model = LlamaWeirdLarge3.from_pretrained(
+                "checkpoint-e2e-s3-3000", 
+                revision = revision, 
+                torch_dtype = torch.bfloat16, 
+                trust_remote_code = trust_remote_code, 
+                **model_kwargs, 
+            ) 
         else:
             try:
                 from auto_gptq import AutoGPTQForCausalLM
