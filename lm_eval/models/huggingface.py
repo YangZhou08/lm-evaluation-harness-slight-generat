@@ -531,6 +531,9 @@ class HFLM(LM):
                 trust_remote_code = trust_remote_code, 
                 **model_kwargs, 
             ) 
+            self._model.set_inference_setting("setting3") 
+            self._model.set_msece_loss(use_mse_loss = False, ce_loss_only = True) 
+            self._model.set_slidingwindowlength(sliding_window_length = 7, addonmodel_start = 7 + 1) 
         else:
             try:
                 from auto_gptq import AutoGPTQForCausalLM
