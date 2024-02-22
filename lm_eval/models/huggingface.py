@@ -741,7 +741,8 @@ class HFLM(LM):
         generation_kwargs["temperature"] = generation_kwargs.get("temperature", 0.0)
         do_sample = generation_kwargs.get("do_sample", None)
 
-        # The temperature has to be a strictly positive float -- if it is 0.0, use greedy decoding strategies
+        # The temperature has to be a strictly positive float -- if it is 0.0, use greedy decoding strategies 
+        print("generation_kwargs.get('temperature'): {}, do_sample: {}".format(generation_kwargs.get("temperature"), do_sample if do_sample is not None else "None")) 
         if generation_kwargs.get("temperature") == 0.0 and do_sample is None:
             generation_kwargs["do_sample"] = do_sample = False
 
