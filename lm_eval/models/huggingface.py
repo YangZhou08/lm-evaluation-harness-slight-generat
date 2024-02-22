@@ -525,7 +525,7 @@ class HFLM(LM):
             ) 
             ''' 
             self._model = LlamaWeirdLarge3.from_pretrained(
-                "checkpoint-e2e-s3-3000", 
+                "/home/yangzho6/model_checkpoints/checkpoint-e2e-s3-3000", 
                 revision = revision, 
                 torch_dtype = torch.bfloat16, 
                 trust_remote_code = trust_remote_code, 
